@@ -6,6 +6,4 @@ quickHiragana is a Python script that you can can use if you are on a machine wi
     ~>  にほんご は わかります か
 
 Note:
-Currently it does not support any special characters or punctuation.
-
 This was written in Python3 and the linux enviroment I used uses UTF-8 for the filesystem encoding.  If this isn't what you are running it may not work for you.
