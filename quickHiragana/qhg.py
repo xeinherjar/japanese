@@ -72,18 +72,39 @@ def convert(phrase):
     i = 0
     kana.append(' ')
     while i < len(wList):
-        if wList[i] + wList[i+1] in hg:
-            buildOutput(hg[wList[i] + wList[i+1]])
-            i = i + 2
-        elif wList[i] in hgv:
-            buildOutput(hgv[wList[i]])
-            i = i + 1
-        elif wList[i] + wList[i+1] + wList[i+2] in hgg:
-            buildOutput(hgg[wList[i] + wList[i+1] + wList[i+2]])
-            i = i + 3
-        else:
-            buildOutput(wList[i])
-            i = i + 1
+        if i < len(wList) - 2:
+            if wList[i] + wList[i+1] + wList[i+2] in hgg:
+                buildOutput(hgg[wList[i] + wList[i+1] + wList[i+2]])
+                i = i + 3
+            elif wList[i] + wList[i+1] in hg:
+                buildOutput(hg[wList[i] + wList[i+1]])
+                i = i + 2
+            elif wList[i] in hgv:
+                buildOutput(hgv[wList[i]])
+                i = i + 1
+            else:
+                buildOutput(wList[i])
+                i = i + 1
+        elif i < len(wList) - 1:
+            if wList[i] + wList[i+1] in hg:
+                buildOutput(hg[wList[i] + wList[i+1]])
+                i = i + 2
+            elif wList[i] in hgv:
+                buildOutput(hgv[wList[i]])
+                i = i + 1
+            else:
+                buildOutput(wList[i])
+                i = i + 1
+        if i < len(wList):
+            if wList[i] in hgv:
+                buildOutput(hgv[wList[i]])
+                i = i + 1
+            else:
+                buildOutput(wList[i])
+                i = i + 1
+ 
+
+
 
 
 def buildOutput(letter):
