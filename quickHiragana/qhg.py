@@ -6,7 +6,9 @@ import sys
 
 #build dictionary to hold key:value
 #single characters -- vowels and n
-hgv = {'a':'あ', 'i':'い', 'u':'う', 'e':'え', 'o':'お', 'n':'ん' }
+hgv = {'a':'あ', 'i':'い', 'u':'う', 'e':'え', 'o':'お', 'n':'ん',
+       '.':'。', ',':'、', '-':'ー'
+ }
 
 #Two characters
 hg  = {'ka':'か', 'ki':'き', 'ku':'く', 'ke':'け', 'ko':'こ',
@@ -54,7 +56,7 @@ hgg = {'shi':'し', 'chi':'ち', 'tsu':'つ',
 kana = []
 
 
-#Determine if ther is anything to do.
+#Determine if there is anything to do.
 if len(sys.argv) < 2:
     sys.exit("Nothing entered to convert.\n")
 
@@ -95,7 +97,7 @@ def convert(phrase):
             else:
                 buildOutput(wList[i])
                 i = i + 1
-        if i < len(wList):
+        elif i < len(wList):
             if wList[i] in hgv:
                 buildOutput(hgv[wList[i]])
                 i = i + 1
