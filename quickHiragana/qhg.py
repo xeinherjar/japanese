@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 #https://github.com/xeinherjar
-#Version: 0.01
+#Version: 0.02
 
 import sys
 
-#build dictionary to hold key:value
-#single characters -- vowels and n
+#build dictionaries to hold key:value
+#single characters -- vowels, n, punctuation
 hgv = {'a':'あ', 'i':'い', 'u':'う', 'e':'え', 'o':'お', 'n':'ん',
        '.':'。', ',':'、', '-':'ー'
- }
+      }
 
 #Two characters
 hg  = {'ka':'か', 'ki':'き', 'ku':'く', 'ke':'け', 'ko':'こ',
@@ -47,72 +47,45 @@ hgg = {'shi':'し', 'chi':'ち', 'tsu':'つ',
        'pya':'ぴゃ', 'pyu':'ぴゅ', 'pyo':'ぴょ',
 
        'xya':'ゃ', 'xyu':'ゅ', 'xyo':'ょ', 'xtu':'っ'
-
- }
-
-
-
-#list to hold translated values
-kana = []
-
-
-#Determine if there is anything to do.
-if len(sys.argv) < 2:
-    sys.exit("Nothing entered to convert.\n")
-
-def validate():
-#First arg is program name... lets skip it.
-    for arg in sys.argv:
-        if arg == sys.argv[0]:
-            continue
-        else:
-            convert(arg)
-
+      }
 
 def convert(phrase):
-    wList = list(phrase)
+    kana = '' 
     i = 0
-    kana.append(' ')
-    while i < len(wList):
-        if i < len(wList) - 2:
-            if wList[i] + wList[i+1] + wList[i+2] in hgg:
-                buildOutput(hgg[wList[i] + wList[i+1] + wList[i+2]])
+    while i < len(phrase):
+        if i < len(phrase) - 2:
+            if phrase[i:i+3] in hgg:
+                kana = kana + hgg[phrase[i:i+3]]
                 i = i + 3
-            elif wList[i] + wList[i+1] in hg:
-                buildOutput(hg[wList[i] + wList[i+1]])
+            elif phrase[i:i+2] in hg:
+                kana = kana + hg[phrase[i:i+2]]
                 i = i + 2
-            elif wList[i] in hgv:
-                buildOutput(hgv[wList[i]])
+            elif phrase[i] in hgv:
+                kana = kana + hgv[phrase[i]]
                 i = i + 1
             else:
-                buildOutput(wList[i])
+                kana = kana + phrase[i]
                 i = i + 1
-        elif i < len(wList) - 1:
-            if wList[i] + wList[i+1] in hg:
-                buildOutput(hg[wList[i] + wList[i+1]])
+        elif i < len(phrase) - 1:
+            if phrase[i:i+2] in hg:
+                kana = kana + hg[phrase[i:i+2]]
                 i = i + 2
-            elif wList[i] in hgv:
-                buildOutput(hgv[wList[i]])
+            elif phrase[i] in hgv:
+                kana = kana + hgv[phrase[i]]
                 i = i + 1
             else:
-                buildOutput(wList[i])
+                phrase[i]
                 i = i + 1
-        elif i < len(wList):
-            if wList[i] in hgv:
-                buildOutput(hgv[wList[i]])
+        elif i < len(phrase):
+            if phrase[i] in hgv:
+                kana = kana + hgv[phrase[i]]
                 i = i + 1
             else:
-                buildOutput(wList[i])
+                kana = kana + phrase[i]
                 i = i + 1
- 
+    return kana
 
 
+#Map convert() over aruments, skipping the first argument [filename]
+print(''.join(map(convert, sys.argv[1:]))) 
 
-
-def buildOutput(letter):
-    kana.append(letter)
-   
-
-validate()
-output = ''.join(kana)
-print(output)
