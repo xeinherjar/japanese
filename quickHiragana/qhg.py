@@ -83,6 +83,7 @@ def convert(phrase):
             else:
                 kana = kana + phrase[i]
                 i = i + 1
+    kana = kana + ' '
     return kana
 
 

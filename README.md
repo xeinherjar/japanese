@@ -1,6 +1,6 @@
 quickHiragana is a Python script that you can can use if you are on a machine without an IME.  Currently it only supports hiragana but I will add other options in the future.
 
---useage:
+--usage:
     ./qhg.py nihongo ha wakarimasu ka
 
     ~>  にほんご は わかります か
